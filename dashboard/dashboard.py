@@ -16,8 +16,7 @@ sns.set(style = 'dark')
 st.set_page_config(page_title="Air Quality Dashboard for Dicoding Course")
 
 # load dataset
-file_path = '../Data/Air-quality-dataset/PRSA_Data_20130301-20170228/PRSA_Data_Shunyi_20130301-20170228.csv'
-df = pd.read_csv(file_path)
+df = pd.read_csv('dashboard/main_data.csv')
 
 # title of the dashboard
 st.title('Air Quality Analysis at Shunyi Station :station:')
@@ -83,10 +82,6 @@ with col3:
 with col4:
     sum_of_ozone = ozone_df['O3_sum'].sum()
     col4.metric('Total of Ozone In The Air', value = int(sum_of_ozone))
-
-# cleaning data
-df.replace('NA', np.nan, inplace=True)
-df.ffill(inplace=True)
 
 # time series plot with trend line
 df['datetime'] = pd.to_datetime(df[['year', 'month', 'day', 'hour']], errors='coerce')
